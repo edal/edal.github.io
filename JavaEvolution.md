@@ -19,7 +19,7 @@ backgroundImage: url('assets/hero-background.jpg')
 
 ---
 
-![bg](assets/historyofJava.png)
+![bg](assets/historyOfJava.png)
 
 ## At a glance
 
