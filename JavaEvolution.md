@@ -11,7 +11,7 @@ backgroundImage: url('assets/hero-background.jpg')
 ![bg left:40% 80%](assets/java.svg)
 
 # **How Java has evolved through time**
- (and how we not)
+ (and how we've not)
 
 
 [//]: # (What are we going to talk about / Who am I)
