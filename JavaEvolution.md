@@ -6,6 +6,7 @@ _paginate: false
 backgroundColor: #fff
 marp: true
 backgroundImage: url('assets/hero-background.jpg')
+
 ---
 
 ![bg left:40% 80%](assets/java.svg)
@@ -24,6 +25,24 @@ backgroundImage: url('assets/hero-background.jpg')
 ## At a glance
 
 
+---
+## Java 5: Enhanced For loop
+```java
+// Java 1.4
+int arr[]={2,11,45,9};
+
+for(int i=0; i<arr.length; i++){
+    System.out.println(arr[i]);
+}
+```
+```java
+// Java 5
+int arr[]={2,11,45,9};
+
+for (int num : arr) {
+    System.out.println(num);
+}
+```
 
 ---
 ## Java 7: Strings in switch Statements
@@ -124,9 +143,104 @@ catch (IOException|SQLException ex) {
 
 ---
 
-## Java 8: lambda expressions
+## Java 8: lambda expressions: functional interfaces
+```java
+@FunctionalInterface
+interface MyFunctionalInterface {
+  public String sayHello(String name);
+}
+```
+---
+###### Java 8: lambda expressions: functional interfaces
+```java 
+// Java 7
+MyFunctionalInterface msg = new MyFunctionalInterface() {
+  public String sayHello(String name) {
+    return "Hello " + name;
+  }
+};
+System.out.println(msg.sayHello("Lambda!"));
+```
 
+```java 
+// Java 8: lambda expression
+MyFunctionalInterface msg = (name) -> {
+  return "Hello " + name;
+};
+System.out.println(msg.sayHello("Lambda!"));
+```
+---
+###### Java 8: lambda expressions: iterate list
+```java 
+// Java 7
+public void iterateList(List<String> names) {
+  for (String name : names) {
+    System.out.println(iterator.next());
+  }
+}
+```
+
+```java 
+// Java 8: lambda expression
+public void iterateList(List<String> names) {
+  // Iterable.forEach is added in JDK8 to take profit of lambda expressions
+  names.forEach(name->System.out.println(name));
+}
+```
+
+---
+###### Java 8: Streams
+```java 
+// Java 7
+List<Transaction> groceryTransactions = new Arraylist<>(); 
+for(Transaction t: transactions){  
+  if(t.getType() == Transaction.GROCERY){   
+    groceryTransactions.add(t);  
+  } 
+} 
+Collections.sort(groceryTransactions, new Comparator(){  
+  public int compare(Transaction t1, Transaction t2){   
+    return t2.getValue().compareTo(t1.getValue());  
+  } 
+}); 
+List<Integer> transactionIds = new ArrayList<>(); 
+for(Transaction t: groceryTransactions){  
+  transactionsIds.add(t.getId()); 
+}
+```
+---
+###### Java 8: Streams
+```java 
+// Java 8
+List<Integer> transactionsIds = transactions.stream()   
+  .filter(t -> t.getType() == Transaction.GROCERY)   
+  .sorted(comparing(Transaction::getValue).reversed())   
+  .map(Transaction::getId)   
+  .collect(toList());
+```
+<style>
+img[alt~="center"] {
+  display: block;
+  margin: 0 auto;
+}
+</style>
+![saturate center](assets/streams.png)
+
+---
+###### Java 8: Parallel Streams
+```java 
+// Java 8
+List<Integer> transactionsIds = transactions.parallelStream()   
+  .filter(t -> t.getType() == Transaction.GROCERY)   
+  .sorted(comparing(Transaction::getValue).reversed())   
+  .map(Transaction::getId)   
+  .collect(toList());
+```
+Only changing stream() per parallelStream() we obtain the same but taking profit of multiple cores!
+
+---
 Java 8 adds functional programming through what are called lambda expressions, which is a simple way of describing a function as some operation on an arbitrary set of supplied variables. All of the variables of the expression must be explicitly supplied; you don't access or store data that's not represented as a parameter. This makes lambda expressions more self-documenting, and the code is immune to hidden variables or states called side-effects. You can describe the transformation from input to output in lambda terms, and the details of transformations and recursions are hidden, which reduces complexity and errors. Lambda or functional language expressions can also facilitate parallelism because every variable is always represented as a parameter, so it follows you can run an expression anywhere and it will return the correct result if you give it the correct parameters. You can also split the lambda expression across several platforms and again get the same result. Lambda expressions add functional programming to Java 8, but the traditional imperative model is still available.
+
 
 ---
 
