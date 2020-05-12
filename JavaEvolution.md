@@ -22,11 +22,10 @@ backgroundImage: url('assets/hero-background.jpg')
 
 ![bg](assets/historyOfJava.png)
 
-## At a glance
-
-
+### At a glance
 ---
-## Java 5: Enhanced For loop
+
+###### Java 5: Enhanced For loop
 ```java
 // Java 1.4
 int arr[]={2,11,45,9};
@@ -43,9 +42,8 @@ for (int num : arr) {
     System.out.println(num);
 }
 ```
-
 ---
-## Java 7: Strings in switch Statements
+###### Java 7: Strings in switch Statements
 
 - The comparison of String objects in switch statements is case sensitive. 
 - The Java compiler generates generally more efficient bytecode from switch statements that use String objects than from chained if-then-else statements
@@ -79,7 +77,7 @@ public String getTypeOfDayWithSwitchStatement(String dayOfWeekArg) {
 ```
 
 ---
-## Java 7: The try-with-resources Statement
+###### Java 7: The try-with-resources Statement
 - The try-with-resources statement ensures that each resource is closed at the end of the statement. 
 - Any object that implements java.lang.AutoCloseable, which includes all objects which implement java.io.Closeable, can be used as a resource.
 
@@ -105,7 +103,7 @@ static String readFirstLineFromFile(String path) throws IOException {
 ```
 
 ---
-## Java 7: The diamond 
+###### Java 7: The diamond 
 Type Inference for Generic Instance Creation
 
 ```java
@@ -120,7 +118,7 @@ Map<String, List<String>> myMap = new HashMap<>();
 
 ---
 
-## Java 7: Catching Multiple Exception Types
+###### Java 7: Catching Multiple Exception Types
 
 
 ```java
@@ -143,7 +141,7 @@ catch (IOException|SQLException ex) {
 
 ---
 
-## Java 8: lambda expressions: functional interfaces
+###### Java 8: lambda expressions: functional interfaces
 ```java
 @FunctionalInterface
 interface MyFunctionalInterface {
@@ -209,7 +207,7 @@ for(Transaction t: groceryTransactions){
 }
 ```
 ---
-###### Java 8: Streams
+###### Java 8: Streams & Functional API
 ```java 
 // Java 8
 List<Integer> transactionsIds = transactions.stream()   
@@ -227,7 +225,7 @@ img[alt~="center"] {
 ![saturate center](assets/streams.png)
 
 ---
-###### Java 8: Parallel Streams
+###### Java 8: But also Parallel Streams
 ```java 
 // Java 8
 List<Integer> transactionsIds = transactions.parallelStream()   
@@ -236,11 +234,27 @@ List<Integer> transactionsIds = transactions.parallelStream()
   .map(Transaction::getId)   
   .collect(toList());
 ```
-Only changing stream() per parallelStream() we obtain the same but taking profit of multiple cores!
+Just using *parallelStream()*  instead of *stream()*  we obtain the same result but taking profit of multiple CPU cores!
 
 ---
-Java 8 adds functional programming through what are called lambda expressions, which is a simple way of describing a function as some operation on an arbitrary set of supplied variables. All of the variables of the expression must be explicitly supplied; you don't access or store data that's not represented as a parameter. This makes lambda expressions more self-documenting, and the code is immune to hidden variables or states called side-effects. You can describe the transformation from input to output in lambda terms, and the details of transformations and recursions are hidden, which reduces complexity and errors. Lambda or functional language expressions can also facilitate parallelism because every variable is always represented as a parameter, so it follows you can run an expression anywhere and it will return the correct result if you give it the correct parameters. You can also split the lambda expression across several platforms and again get the same result. Lambda expressions add functional programming to Java 8, but the traditional imperative model is still available.
+
+###### Java 9: Convenience Factory Methods for Collections
+```java 
+// Java 8
+Set<String> set = new HashSet<>();
+set.add("a");
+set.add("b");
+set.add("c");
+set = Collections.unmodifiableSet(set);
+```
+
+```java 
+// Java 9
+Set<String> set = Set.of("a", "b", "c");
+```
 
 
----
+[//]: # (Java 8 adds functional programming through what are called lambda  xpressions, which is a simple way of describing a function as some operation on an arbitrary set of supplied variables. All of the variables of the expression must be explicitly supplied; you don't access or store data that's not represented as a parameter. This makes lambda expressions more self-documenting, and the code is immune to hidden variables or states called side-effects. You can describe the transformation from input to output in lambda terms, and the details of transformations and recursions are hidden, which reduces complexity and errors. Lambda or functional language expressions can also facilitate parallelism because every variable is always represented as a parameter, so it follows you can run an expression anywhere and it will return the correct result if you give it the correct parameters. You can also split the lambda expression across several platforms and again get the same result. Lambda expressions add functional programming to Java 8, but the traditional imperative model is still available.)
+
+
 
