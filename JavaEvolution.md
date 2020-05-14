@@ -290,8 +290,49 @@ set = Collections.unmodifiableSet(set);
 // Java 9
 Set<String> set = Set.of("a", "b", "c");
 ```
+---
+###### Java 10: Local Variable Type Inference
+```java 
+// Java 9
+public void method() {
+  Map<String, String> map = new HashMap<>();
+  map.put("APL", "Apple");
+  map.put("SMG", "Samsung");
+  map.forEach((k,v)-> System.out.println(k + " " + v));
+}
+```
+```java 
+// Java 10
+public void method() {
+  var map = new HashMap<>();
+  map.put("APL", "Apple");
+  map.put("SMG", "Samsung");
+  map.forEach((k,v)-> System.out.println(k + " " + v));
+}
+```
+---
+###### Java 10: Optional.orElseThrow() Method
+```java 
+// Java 9
 
+```
 
+```java 
+// Java 10
+
+```
+---
+###### Java 10: APIs for Creating Unmodifiable Collections
+```java 
+// Java 9
+
+```
+
+```java 
+// Java 10
+
+```
+---
 [//]: # (Java 8 adds functional programming through what are called lambda  xpressions, which is a simple way of describing a function as some operation on an arbitrary set of supplied variables. All of the variables of the expression must be explicitly supplied; you don't access or store data that's not represented as a parameter. This makes lambda expressions more self-documenting, and the code is immune to hidden variables or states called side-effects. You can describe the transformation from input to output in lambda terms, and the details of transformations and recursions are hidden, which reduces complexity and errors. Lambda or functional language expressions can also facilitate parallelism because every variable is always represented as a parameter, so it follows you can run an expression anywhere and it will return the correct result if you give it the correct parameters. You can also split the lambda expression across several platforms and again get the same result. Lambda expressions add functional programming to Java 8, but the traditional imperative model is still available.)
 
 
