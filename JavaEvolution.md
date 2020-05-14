@@ -187,7 +187,7 @@ public void iterateList(List<String> names) {
 ```
 
 ---
-###### Java 8: Streams
+###### Java 8: Streams & Functional API
 ```java 
 // Java 7
 List<Transaction> groceryTransactions = new Arraylist<>(); 
@@ -236,6 +236,44 @@ List<Integer> transactionsIds = transactions.parallelStream()
 ```
 Just using *parallelStream()*  instead of *stream()*  we obtain the same result but taking profit of multiple CPU cores!
 
+---
+###### Java 8: Optional class
+```java 
+// Java 7
+String result = this.buildResult();
+if (result == null) {
+    return "n/a";
+}
+
+return result.toUpperCase();
+```
+
+```java 
+// Java 8
+return Optional.ofNullable(buildResult())
+               .map(String::toUpperCase)
+               .orElse("n/a");
+```
+---
+###### Java 8: Optional class
+```java 
+// Java 7
+String version = "UNKNOWN";
+if(computer != null){
+  Soundcard soundcard = computer.getSoundcard();
+  if(soundcard != null){
+    USB usb = soundcard.getUSB();
+    if(usb != null){
+      version = usb.getVersion();
+    }
+  }
+}
+// Java 8
+String version = computer.flatMap(Computer::getSoundcard)
+                        .flatMap(Soundcard::getUSB)
+                        .map(USB::getVersion)
+                        .orElse("UNKNOWN");
+```
 ---
 
 ###### Java 9: Convenience Factory Methods for Collections
