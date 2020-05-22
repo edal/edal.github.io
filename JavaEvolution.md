@@ -231,6 +231,7 @@ interface MyFunctionalInterface {
 ```java 
 // Java 7
 MyFunctionalInterface msg = new MyFunctionalInterface() {
+  @Override
   public String sayHello(String name) {
     return "Hello " + name;
   }
@@ -278,7 +279,22 @@ public void iterateList(List<String> names) {
   names.forEach(name->System.out.println(name));
 }
 ```
-
+---
+###### Java 8: lambda expressions: method references
+```java 
+// Java 8: lambda expression
+public void iterateList(List<String> names) {
+  // Iterable.forEach is added in JDK8 to take profit of lambda expressions
+  names.forEach(name->System.out.println(name));
+}
+```
+```java 
+// Java 8: lambda expression
+public void iterateList(List<String> names) {
+  // Instead of implement a lambda for an existing method, we can use method reference
+  names.forEach(System.out::println);
+}
+```
 ---
 ###### Java 8: Streams & Functional API
 ```java 
@@ -332,7 +348,7 @@ Just using *parallelStream()*  instead of *stream()*  we obtain the same result 
 <br>
 <br>
 <br>
-(*) multithreading is not granted on all conditions
+(*) multithreading benefits are not granted on all conditions!
 
 
 ---
@@ -373,6 +389,11 @@ String version = computer.flatMap(Computer::getSoundcard)
                         .map(USB::getVersion)
                         .orElse("UNKNOWN");
 ```
+---
+###### Java 9: It's 2017
+- Modular system jigsaw
+- Modular runtimes
+- Removes support for 1.5 and earlier source and target options
 ---
 
 ###### Java 9: Convenience Factory Methods for Collections
