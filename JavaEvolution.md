@@ -69,7 +69,7 @@ public class Product { ... }
 ---
 ###### Java 5: Autoboxing/unboxing
 ```java
-// Java 1.44
+// Java 1.4
 List<Integer> li = new ArrayList<Integer>();
 for (int i = 1; i < 50; i += 2) {}
     li.add(Integer.valueOf(i));
@@ -391,25 +391,29 @@ String version = computer.flatMap(Computer::getSoundcard)
 ```
 ---
 ###### Java 9: It's 2017
-- Modular system jigsaw
-- Modular runtimes
+- No remarkable language improvements
+<br>
+- Reactive Streams 
+- HTTP 2.0 (Google SPDY) Support
+- Modular system (jigsaw)
+- Java + REPL (Read-Eval-Print-Loop) = jshell
+
 - Removes support for 1.5 and earlier source and target options
+
+
+
+
 ---
+###### Java 10: It's 2018
+- Local Variable Type Inference
+<br>
+- GC improvements
+- Bytecode generation improvement
+- Security improvements
+- Lots of deprecations
 
-###### Java 9: Convenience Factory Methods for Collections
-```java 
-// Java 8
-Set<String> set = new HashSet<>();
-set.add("a");
-set.add("b");
-set.add("c");
-set = Collections.unmodifiableSet(set);
-```
 
-```java 
-// Java 9
-Set<String> set = Set.of("a", "b", "c");
-```
+
 ---
 ###### Java 10: Local Variable Type Inference
 ```java 
@@ -431,71 +435,159 @@ public void method() {
 }
 ```
 ---
-###### Java 10: APIs for Creating Unmodifiable Collections
-
-java.util.List:	
-```<E> List<E> copyOf(Collection<? extends E> coll)```
-java.util.Set:	
-```<E> Set<E> copyOf(Collection<? extends E> coll)```
-java.util.Map:	
-```<K,V> Map<K,V> copyOf(Map<? extends K, ? extends V> coll)```
-
-- Shallow copy
-- Attempting to modify it (adding/removing new elements) throws UnsupportedOperationException
-
----
-###### Java 10: APIs for Creating Unmodifiable Collections
-```java 
-// Diference with Collections.unmodifiableList 
-public class WithCollectionsUtilExample {
-  public static void main(String[] args) {
-      List<Integer> list = new ArrayList<>();
-      list.add(1);
-      list.add(2);
-      List<Number> unmodifiableList = Collections.unmodifiableList(list);
-      List<Integer> copyOfList = List.copyOf(list);
-      //modifying the source list
-      list.add(3);
-      System.out.println("unmodifiableList: " + unmodifiableList);
-      System.out.println("copyOfList: " + copyOfList);
-  }
-}
-// unmodifiableList: [1, 2, 3] 
-// copyOfList: [1, 2]
-```
----
-###### Java 10: Inmutable/Unmodifiable Collections Stream API Collectors
-```java 
-// Java 9
-var unmodifiableList = Stream.of(42, 30, 20, 10)
-  .collect(Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList));
-```
-
-```java 
-// Java 10
-var unmodifiableList = Stream.of(42, 30, 20, 10)
-  .collect(Collectors.toUnmodifiableList());
-```
----
-###### Java 11: Main Features
+###### Java 11: It's still 2018
+- Local-Variable Syntax for Lambda Parameters
+ (Allowing 'var' for the formal parameters of an implicitly typed lambda expression)
+<br>
 - LTS version
 - Oracle JDK is no longer free for commercial use
-- New utility methods in String class
-- Local-Variable Syntax for Lambda Parameters
-- Reading/Writing Strings to and from the Files
+
 - JEP 321: HTTP Client
 
+---
+###### Java 12: It's  2019
+- Switch Expressions
+  
+<br>
+
+---
+###### Java 12: Switch Expressions
+```java
+// Java 7
+int numberOfLetters;
+switch (fruit) {
+case PEAR:
+    numberOfLetters = 4;
+    break;
+case APPLE:
+case MANGO:
+    numberOfLetters = 5;
+    break;
+case ORANGE:
+case PAPAYA:
+    numberOfLetters = 6;
+    break;
+default:
+    numberOfLetters = 0;
+}
+```
+---
+###### Java 12: Switch Expressions
+```java
+// Java 12
+int numberOfLetters = switch (fruit) {
+    case PEAR -> 4;
+    case APPLE, MANGO -> 5;
+    case ORANGE, PAPAYA -> 6;
+    default      -> {
+        // We can also write blocks of code and return with yield
+        int result = 0
+        yield result;
+    }
+}
+
+```
 
 ---
 
-```java 
-// Java 10
+###### Java 13: It's still 2019
+- No remarkable language improvements
+<br>
+- Improvements on NIO and networking
+- Improvements in memory management
+- Improvements in cryptography
 
+
+---
+###### Java 14: It's  2020
+- Pattern Matching of instanceof
+<br>
+
+
+
+---
+###### Java 14: Pattern Matching of instanceof
+```java
+// Java 13
+if (obj instanceof Integer) {
+    int intValue = (Integer) obj;
+    // ... use intValue ...
+}
 ```
-```java 
-// Java 11
-
+```java
+// Java 14
+if (x instanceof Integer i) {
+    // ... use i as an Integer directly ...
+}
 ```
 ---
+###### Java 15: September 2020
+
+- Text Blocks
+- Sealed Classes (Preview)
+- Records (Second Preview)
+<br>
+- Hidden Classes
+ 
+---
+###### Java 15: Text Blocks
+
+```java
+String query = "SELECT `EMP_ID`, `LAST_NAME` FROM `EMPLOYEE_TB`\n" +
+               "WHERE `CITY` = 'INDIANAPOLIS'\n" +
+               "ORDER BY `EMP_ID`, `LAST_NAME`;\n";
+```
+
+```java
+String query = """
+               SELECT `EMP_ID`, `LAST_NAME` FROM `EMPLOYEE_TB`
+               WHERE `CITY` = 'INDIANAPOLIS'
+               ORDER BY `EMP_ID`, `LAST_NAME`;
+               """;
+```
+---
+###### Java 15: Sealed Classes 
+
+```java
+package com.example.geometry;
+
+public sealed class Shape
+    permits Circle, Rectangle, Square {...}
+```
+
+```java
+package com.example.geometry;
+
+sealed class Shape {...}
+... class Circle    extends Shape {...}
+... class Rectangle extends Shape {...}
+... class Square    extends Shape {...}
+```
+---
+###### Java 15: Records (Second Preview)
+
+```java
+public record FXOrder(int units,
+                      CurrencyPair pair,
+                      Side side,
+                      double price,
+                      LocalDateTime sentAt,
+                      int ttl) {}
+```
+
+```java
+var order = new FXOrder(1, 
+                    CurrencyPair.GBPUSD, 
+                    Side.Bid, 
+                    1.25, 
+                    LocalDateTime.now(), 
+                    1000);
+
+```
 
 
+
+---
+#### Conclusions and thoughts
+
+https://www.theserverside.com/feature/Java-evolution-into-a-functional-programming-language-reflects-demand
