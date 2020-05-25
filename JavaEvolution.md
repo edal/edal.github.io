@@ -588,6 +588,5 @@ var order = new FXOrder(1,
 
 
 ---
-#### Conclusions and thoughts
-
-https://www.theserverside.com/feature/Java-evolution-into-a-functional-programming-language-reflects-demand
+![bg](assets/historyOfJava.png)
+#### Thoughts
