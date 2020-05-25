@@ -70,7 +70,7 @@ public class Product { ... }
 ###### Java 5: Autoboxing/unboxing
 ```java
 // Java 1.4
-List<Integer> li = new ArrayList<Integer>();
+List li = new ArrayList();
 for (int i = 1; i < 50; i += 2) {}
     li.add(Integer.valueOf(i));
 }
